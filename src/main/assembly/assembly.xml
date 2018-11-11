@@ -1,0 +1,70 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd"
+          xmlns:w="http://maven.apache.org/ASSEMBLY/2.0.0">
+
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <id>lol</id>
+
+    <formats>
+        <format>zip</format>
+        <format>dir</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>conf</outputDirectory>
+            <includes>
+                <include>*.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>logback.xml</include>
+            </includes>
+        </fileSet>
+        <!--<fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>${project.artifactId}-${project.version}.jar</include>
+            </includes>
+        </fileSet>-->
+
+        <!-- WEBAPP part -->
+        <fileSet>
+            <directory>${project.build.directory}/${project.artifactId}/webapp</directory>
+            <outputDirectory>/webapp</outputDirectory>
+        </fileSet>
+
+
+        <!-- BIN part -->
+        <fileSet>
+            <directory>${project.build.directory}/${project.artifactId}/bin</directory>
+            <outputDirectory>/scripts</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <directoryMode>0755</directoryMode>
+        </fileSet>
+    </fileSets>
+    <!--<files>
+        <file>
+            <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+            <outputDirectory>bin</outputDirectory>
+        </file>
+    </files>-->
+    <!--<dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>${project.groupId}:${project.artifactId}:jar:*</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>-->
+</assembly>
